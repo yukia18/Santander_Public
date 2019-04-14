@@ -3,6 +3,7 @@ from pathlib import Path
 from logging import getLogger, basicConfig, DEBUG
 
 import numpy as np
+import pandas as pd
 from sklearn.utils import check_random_state
 
 from modules import DataTransfer, TrainerAgency
@@ -71,7 +72,7 @@ def main():
 
     train_X, train_y, test_X = dto.fetch_inputs()
     oof, predictions, feature_importance_df = random_seed_average_cv(
-        train_X, train_y, test_X, verbose=1
+        train_X, train_y, test_X, args, verbose=1
     )
 
     prefix = f'{args.dir}_rsa_{args.model}_'

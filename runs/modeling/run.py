@@ -23,7 +23,7 @@ def main():
     dto = transfer.load()
 
     agency = TrainerAgency()
-    trainer = agency.load_trainer(args.model, n_split=2)
+    trainer = agency.load_trainer(args.model, n_split=11)
     oof, predictions, feature_importance_df = trainer.cv(
         dto.train_X, dto.train_y, dto.test_X, verbose=1
     )
