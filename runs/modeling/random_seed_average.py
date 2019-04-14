@@ -20,14 +20,14 @@ def random_seed_average_cv(train_X, train_y, test_X, args, verbose=1):
 
     agency = TrainerAgency()
     random_seed_sampler = check_random_state(42)
-    cv_scores_list = []
+    cv_scores = []
 
-    for i in range(n_rsa):
+    for i in range(args.num_random_seed_average):
         logger.debug('[RUN] random seed average: {}/{}'.format(
             i+1, args.num_random_seed_average
         ))
         
-        seed = random_seed_sampler.randint(0, 100)
+        seed = random_seed_sampler.randint(0, 1000)
 
         trainer = agency.load_trainer(args.model, n_split=4, kfold_seed=seed, model_seed=seed)
         oof, predictions, df = trainer.cv(train_X, train_y, test_X, verbose=1)
@@ -53,7 +53,7 @@ def random_seed_average_cv(train_X, train_y, test_X, args, verbose=1):
             args.num_random_seed_average, mean_cv_score
         ))
     
-    return oof, predictions, mean_cv_score
+    return oof, predictions, feature_importance_df
 
 
 def main():
@@ -75,7 +75,7 @@ def main():
     )
 
     prefix = f'{args.dir}_rsa_{args.model}_'
-    oof_df, pred_df = dto.fetch_outputs
+    oof_df, pred_df = dto.fetch_outputs()
     transfer.save(oof_df, pred_df, oof, predictions, feature_importance_df, prefix=prefix)
 
 

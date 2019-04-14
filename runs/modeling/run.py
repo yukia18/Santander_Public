@@ -29,7 +29,7 @@ def main():
     )
 
     prefix = f'{args.dir}_{args.model}_'
-    oof_df, pred_df = dto.fetch_outputs
+    oof_df, pred_df = dto.fetch_outputs()
     transfer.save(oof_df, pred_df, oof, predictions, feature_importance_df, prefix=prefix)
 
 

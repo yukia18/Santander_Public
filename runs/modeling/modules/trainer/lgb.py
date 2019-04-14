@@ -18,8 +18,6 @@ class LGBTrainer(BaseTrainer):
             'feature_fraction': 0.7, 
             'lambda_l1': 1.5402103791851314, 
             'lambda_l2': 3.5484117894847667,
-            'bagging_seed': model_seed,
-            'feature_fraction_seed': model_seed,
             'seed': model_seed,
             'save_binary': True,
             'device': 'cpu',
