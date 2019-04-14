@@ -74,7 +74,7 @@ def main():
         train_X, train_y, test_X, verbose=1
     )
 
-    prefix = f'{args.dir}_{args.model}_'
+    prefix = f'{args.dir}_rsa_{args.model}_'
     oof_df, pred_df = dto.fetch_outputs
     transfer.save(oof_df, pred_df, oof, predictions, feature_importance_df, prefix=prefix)
 
